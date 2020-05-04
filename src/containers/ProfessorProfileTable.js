@@ -79,7 +79,7 @@ const columns = [
             }
             return (
                 <Tag color={color} key={tag}>
-                    {tag.toUpperCase()}
+                    {tag}
                 </Tag>
             );
         })}
@@ -170,7 +170,7 @@ class ProfessorProfileTable extends React.Component {
         const children = [];
 
         children.push(
-            <Col span={8} key={0}>
+            <Col span={5} key={0}>
                 <Form.Item
                     name={`nameContain`}
                     // label={`Name contains...`}
@@ -185,7 +185,7 @@ class ProfessorProfileTable extends React.Component {
             </Col>,
         );
         children.push(
-            <Col span={8} key={1}>
+            <Col span={5} key={1}>
                 <Form.Item
                     name={`departmentIs`}
                     // label={`Name contains...`}
@@ -213,6 +213,21 @@ class ProfessorProfileTable extends React.Component {
                 </Form.Item>
             </Col>,
         );
+        children.push(
+            <Col span={5} key={0}>
+                <Form.Item
+                    name={`tagContain`}
+                    // label={`Name contains...`}
+                    rules={[
+                        {
+                            required: false,
+                        },
+                    ]}
+                >
+                    <Input placeholder="Tags contain..." />
+                </Form.Item>
+            </Col>,
+        );
 
 
         return children;
@@ -223,6 +238,7 @@ class ProfessorProfileTable extends React.Component {
         axios.post('http://127.0.0.1:8000/api/main/ProfessorProfileList/search/', {
             nameContain: values.nameContain,
             departmentIs: this.state.selectedDepartment,
+            tagContain: values.tagContain,
         }).then(res => {
             // console.log(res);
             let tempProfile = JSON.parse(res.data);

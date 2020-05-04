@@ -79,7 +79,7 @@ const columns = [
             }
             return (
                 <Tag color={color} key={tag}>
-                    {tag.toUpperCase()}
+                    {tag}
                 </Tag>
             );
         })}
@@ -166,7 +166,7 @@ class StudentProfileTable extends React.Component {
         const children = [];
 
         children.push(
-            <Col span={8} key={0}>
+            <Col span={5} key={0}>
                 <Form.Item
                     name={`nameContain`}
                     // label={`Name contains...`}
@@ -181,7 +181,7 @@ class StudentProfileTable extends React.Component {
             </Col>,
         );
         children.push(
-            <Col span={8} key={1}>
+            <Col span={5} key={1}>
                 <Form.Item
                     name={`departmentIs`}
                     // label={`Name contains...`}
@@ -210,7 +210,7 @@ class StudentProfileTable extends React.Component {
             </Col>,
         );
         children.push(
-            <Col span={8} key={2}>
+            <Col span={5} key={2}>
                 <Form.Item
                     name={`minGPA`}
                     // label={`Name contains...`}
@@ -221,6 +221,22 @@ class StudentProfileTable extends React.Component {
                     ]}
                 >
                     <InputNumber min={0} max={5.00} step={0.01} placeholder="Minimum GPA is..." style={{width:"100%"}}/>
+                </Form.Item>
+            </Col>,
+        );
+
+        children.push(
+            <Col span={5} key={3}>
+                <Form.Item
+                    name={`tagContain`}
+                    // label={`Name contains...`}
+                    rules={[
+                        {
+                            required: false,
+                        },
+                    ]}
+                >
+                    <Input placeholder="Tags contain..." />
                 </Form.Item>
             </Col>,
         );
@@ -236,6 +252,7 @@ class StudentProfileTable extends React.Component {
             nameContain: values.nameContain,
             departmentIs: this.state.selectedDepartment,
             minGPA: values.minGPA,
+            tagContain: values.tagContain,
         }).then(res => {
             console.log(res);
             let tempProfile = JSON.parse(res.data);
